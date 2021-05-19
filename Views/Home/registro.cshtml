@@ -1,0 +1,106 @@
+﻿<link href="~/css/registro.css" rel="stylesheet" />
+
+<div align="center">
+    <h2>Registro de Candidatos</h2>
+    <form method="post" action="../api/candidate" id="fm">
+        <p><input type="text" placeholder="Legenda" id="leg" name="leg" onkeyup="this.value=this.value.replace(/[^\d]/,'')" onkeypress="ns()" /></p>
+        <p><input type="text" placeholder="Nome Completo" id="nom" name="nom" onkeypress="ns()" /></p>
+        <p><input type="text" placeholder="Nome do Vice" id="vic" name="vic" onkeypress="ns()" /></p>
+    </form>
+    <p>
+        <button onclick="iniciarRegistro()">Registrar</button>
+        <button onclick="apagarCandidato()">Apagar</button>
+    </p>
+</div>
+
+<table id="registros">
+    <tr>
+        <th>Legenda</th>
+        <th>Nome</th>
+        <th>Nome do Vice</th>
+        <th>Data</th>
+    </tr>
+</table>
+
+<script type="text/javascript">
+    var candidatos = "";
+
+    obterCandidatos();
+    function obterCandidatos() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "../api/candidate";
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            candidatos = this.responseText;
+            alterarTabela(candidatos);
+        }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+    return;
+    }
+
+    function alterarTabela(candidatos) {
+        var candidatos = JSON.parse(candidatos);
+        var tabela = document.getElementById("registros");
+
+        var cols = Object.keys(candidatos[0]).length;
+        var colnms = [];
+        colnms = Object.keys(candidatos[0]);
+
+        for (var i = 0; i < candidatos.length; i++) {
+            row = tabela.insertRow(-1);
+            colnms.forEach(function (colnm) {
+                var cel = row.insertCell(-1);
+                cel.innerHTML = candidatos[i][colnm];
+            });
+        }
+    }
+</script>
+
+<script type="text/javascript">
+
+    function apagarCandidato() {
+        document.getElementById("fm").setAttribute("action", "../api/cdel");
+        document.getElementById("fm").submit();
+    }
+
+    function iniciarRegistro() {
+        if (verificarLegenda() != "") {
+            alert(verificarLegenda());
+        }
+        else if (validarNomes() != "") {
+            alert(validarNomes());
+        }
+        else {
+            document.getElementById("fm").submit();
+        }
+    }
+
+    function verificarLegenda() {
+        var tL = document.querySelector("#leg").value.length;
+        document.querySelector("#leg").value.replace(/[^\d]/, '');
+        if (tL > 2) {
+            return "A legenda não pode ter mais de 2 números\n";
+        }
+        if (tL < 2) {
+            return "A legenda não pode ter menos de 2 números\n";
+        }
+        return "";
+    }
+
+    function validarNomes() {
+        if (document.querySelector("#nom").value.length < 2) {
+            return "O nome deve ter pelo menos 2 caracteres\n";
+        }
+        if (document.querySelector("#vic").value.length < 2) {
+            return "O nome do vice deve ter pelo menos 2 caracteres\n";
+        }
+        return "";
+    }
+
+    function ns() {
+        return !(window.event && window.event.keyCode == 13);
+    }
+</script>

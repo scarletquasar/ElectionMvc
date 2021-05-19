@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="main" align="center">
+        <div class="num-container">
+            <h1 class="display-4">Urna Eletrônica</h1>
+            <button onclick="addVotoNum(1)" class="numero-btn" >1</button>
+            <button onclick="addVotoNum(2)" class="numero-btn">2</button>
+            <button onclick="addVotoNum(3)" class="numero-btn">3</button>
+            <button onclick="addVotoNum(4)" class="numero-btn">4</button>
+            <button onclick="addVotoNum(5)" class="numero-btn">5</button>
+            <button onclick="addVotoNum(6)" class="numero-btn">6</button>
+            <button onclick="addVotoNum(7)" class="numero-btn">7</button>
+            <button onclick="addVotoNum(8)" class="numero-btn">8</button>
+            <button onclick="addVotoNum(9)" class="numero-btn">9</button>
+            <button onclick="addVotoNum(0)" class="numero-btn">0</button>
+        </div>
+        <button class="votar-btn" onclick="votar()">CONFIRMAR</button>
+        <button onclick="limparVotos()" class="corrigir-btn">CORRIGIR</button>
+        <button onclick="votarBranco()" class="branco-btn">BRANCO</button>
+        <form action="~/api/vote" method="post" id="fm">
+            <p><input type="text" id="num-voto" name="leg" size="1" readonly /></p>
+        </form>
+    </div>
+
+<script>
+    function votar() {
+        if (document.getElementById('num-voto').value.length == 2) {
+            document.getElementById("fm").submit();
+        }
+        else {
+            alert("A legenda precisa ter 2 caracteres.");
+        }
+    }
+
+    function votarBranco() {
+        document.getElementById('num-voto').value = "";
+        document.getElementById("fm").submit();
+    }
+    function addVotoNum(numero) {
+        if (document.getElementById('num-voto').value.length < 2) {
+            document.getElementById('num-voto').value += numero;
+        }
+    }
+
+    function limparVotos() {
+        document.getElementById('num-voto').value = "";
+    }
+</script>

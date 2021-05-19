@@ -1,0 +1,71 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.num-container {
+    width: 300px;
+}
+.numero-btn {
+    width: 75px;
+    height: 75px;
+    border: none;
+    border-radius: 5px 5px;
+    margin-top: 2%;
+    font-size: larger;
+    color: white;
+    background-color: black;
+}
+
+.numero-btn:active {
+    color: black;
+    background-color: white;
+}
+
+.votar-btn {
+    border: none;
+    border-radius: 5px 5px;
+    margin-top: 2%;
+    width: 125px;
+    height: 50px;
+    color: white;
+    background-color: #006400;
+}
+
+.corrigir-btn {
+    border: none;
+    border-radius: 5px 5px;
+    margin-top: 2%;
+    width: 125px;
+    height: 50px;
+    color: white;
+    background-color: #c57102;
+}
+
+.corrigir-btn:active {
+    background-color: #FFFF33
+}
+
+.votar-btn:active {
+    background-color: #32CD32;
+}
+
+.branco-btn {
+    background-color: #3f3f3f;
+    border: none;
+    border-radius: 5px 5px;
+    margin-top: 2%;
+    width: 125px;
+    height: 50px;
+    color: white;
+}
+
+.branco-btn:active {
+    background-color: #c8c2bc;
+}
+
+#num-voto {
+    text-align: center;
+    font-size: xx-large;
+}

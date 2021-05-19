@@ -1,0 +1,22 @@
+﻿#registros {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#registros td, #registros th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#registros tr:nth-child(even){background-color: #f2f2f2;}
+
+#registros tr:hover {background-color: #ddd;}
+
+#registros th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}

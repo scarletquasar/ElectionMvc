@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/urna.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <a href="@Url.Action("Index", "Home")">Votar</a>
+        <a href="@Url.Action("votos", "Home")">Votos</a>
+        <a href="@Url.Action("registro", "Home")">Candidatos</a>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+</body>
+</html>

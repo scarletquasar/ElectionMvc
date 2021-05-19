@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "votos";
+}
+<link href="~/css/registro.css" rel="stylesheet" />
+
+<div align="center">
+    <h2>Lista de Votos</h2>
+    <table id="registros">
+        <tr>
+            <th>Legenda</th>
+            <th>Data/Hora do Voto</th>
+            <th>Nome do Candidato</th>
+            <th>Nome do Vice</th>
+        </tr>
+    </table>
+</div>
+
+<script>
+    var votos = "";
+
+    obterVotos();
+    function obterVotos() {
+    var xmlhttp = new XMLHttpRequest();
+    var url = "../api/votes";
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            votos = this.responseText;
+            alterarTabela(votos);
+        }
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+    return;
+    }
+
+    function alterarTabela(votos) {
+        var votos = JSON.parse(votos);
+        var tabela = document.getElementById("registros");
+
+        var cols = Object.keys(votos[0]).length;
+        var colnms = [];
+        colnms = Object.keys(votos[0]);
+
+        for (var i = 0; i < votos.length; i++) {
+            row = tabela.insertRow(-1);
+            colnms.forEach(function (colnm) {
+                var cel = row.insertCell(-1);
+                cel.innerHTML = votos[i][colnm];
+            });
+        }
+    }
+
+
+</script>
